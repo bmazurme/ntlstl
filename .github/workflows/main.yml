@@ -22,7 +22,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: main/package-lock.json
-    - run: cd main
     - run: npm --prefix main ci --no-audit
-    - run: npm --prefix main run dev
-    - run: npm --prefix main run cy:run
+    - run: npm --prefix main run test
