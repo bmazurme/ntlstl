@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  main:
+    container_name: compose-main-container
+    build:
+      context: main
+      dockerfile: Dockerfile
+    image: cr.yandex/${CR_REGISTRY}/ntlstl-main:latest
+    # platform: linux/amd64
+    networks:
+      - internet
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+
+  react:
+    container_name: compose-react-container
+    build:
+      context: react
+      dockerfile: Dockerfile
+    image: cr.yandex/${CR_REGISTRY}/ntlstl-react:latest
+    # platform: linux/amd64
+    networks:
+      - internet
+    ports:
+      - 5173:3000
+    restart: unless-stopped
+
+networks:
+  internal-network:
+    driver: bridge
+    internal: true
+  internet:
+    driver: bridge
