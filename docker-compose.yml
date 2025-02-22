@@ -1,12 +1,12 @@
 version: "3.9"
 
 services:
-  main:
-    container_name: compose-main-container
+  nextjs:
+    container_name: compose-nextjs-container
     build:
-      context: main
+      context: nextjs
       dockerfile: Dockerfile
-    image: cr.yandex/${CR_REGISTRY}/ntlstl-main:latest
+    image: cr.yandex/${CR_REGISTRY}/ntlstl-nextjs:latest
     # platform: linux/amd64
     networks:
       - internet
