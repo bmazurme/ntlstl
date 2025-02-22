@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  tools_dev:
+    # container_name: tools
+    image: {{ env.IMAGE_URL }}
+    restart: always
+    ports:
+      - '3000:80'
