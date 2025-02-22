@@ -21,6 +21,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: main/package-lock.json
-    - run: npm --prefix main ci --no-audit
-    - run: npm --prefix main run test
+        cache-dependency-path: nextjs/package-lock.json
+    - run: npm --prefix nextjs ci --no-audit
+    - run: npm --prefix nextjs run test
