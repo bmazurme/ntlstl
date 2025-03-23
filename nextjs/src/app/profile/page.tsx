@@ -1,6 +1,6 @@
 // 'use client';
 
-import {Layout} from './components/layout';
+import {Layout} from '../../components/profile/layout/layout';
 
 export default function Page() {
   return (
