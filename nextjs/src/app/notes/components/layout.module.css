@@ -1,0 +1,103 @@
+.box {
+  padding: 20px;
+  max-width: 1024px;
+}
+
+.card {
+  width: 100%;
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; */
+  padding: 20px;
+  display: flex;
+  align-items: start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.skills {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
+  max-width: 640px;
+}
+
+.label {
+  margin: 5px;
+}
+
+.educations {
+  display: flex;
+  align-items: start;
+  justify-content: flex-start;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  padding: 0;
+  width: 100%;
+  max-width: 640px;
+}
+
+.education {
+  display: grid;
+  margin-bottom: 10px;
+  
+  grid-template-areas:
+    "date title"
+    "date description"
+    "date description";
+}
+
+.date {
+  grid-area: date;
+  min-width: 160px;
+}
+
+.title {
+  grid-area: title;
+}
+
+.description {
+  grid-area: description;
+}
+
+.job {
+  display: grid;
+  margin-bottom: 10px;
+  max-width: 640px;
+  
+  grid-template-areas:
+    "from name"
+    "to position"
+    "gap details";
+}
+
+.from {
+  grid-area: from;
+  min-width: 160px;
+}
+
+.to {
+  grid-area: to;
+  min-width: 160px;
+}
+.name {
+  grid-area: name;
+}
+
+.position {
+  grid-area: position;
+}
+
+.details {
+  grid-area: details;
+}
+
+.block {
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+

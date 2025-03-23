@@ -3,14 +3,11 @@
 import React, {useContext} from 'react';
 import block from 'bem-cn-lite';
 import {ThemeProvider} from '@gravity-ui/uikit';
-import {ThemeContext} from '../app';
-
+import {ThemeContext} from '@/context/theme-context';
+import {DEFAULT_THEME} from '../app/constants';
 import './wrapper.scss';
 
 const b = block('wrapper');
-
-const DARK = 'dark';
-const DEFAULT_THEME = DARK;
 
 export const DEFAULT_BODY_CLASSNAME = `g-root g-root_theme_${DEFAULT_THEME}`;
 
