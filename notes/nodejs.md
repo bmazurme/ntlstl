@@ -15,7 +15,7 @@
 Если это первое подключение к серверу, вы увидите фразу:
 
 ```bash
-    The authenticity of host '84.201.130.70 (84.201.130.70)' can't be established.
+    The authenticity of host '192.168.50.51 (192.168.50.51)' can't be established.
     ECDSA key fingerprint is SHA256:gGz1AULJpNptRRaqLz2FQTDf/IRxSGPA0vvmmXWy/6I.
     Are you sure you want to continue connecting (yes/no)?
 ```
