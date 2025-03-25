@@ -179,7 +179,7 @@ export const Layout: React.FC = () => {
         </Text>
         <div className={style.skills}>
           {skills.map((skill) => (
-            <Label className={style.label} theme="normal" key={skill}>
+            <Label className={style.label} theme="clear" key={skill}>
               {skill}
             </Label>
           ))}
