@@ -3,7 +3,7 @@
 установить
 
 ```shell
-  $ export https_proxy="http://ds-kws-11vp:3128"
+  $ export https_proxy="http://ds-ks-1vp:3128"
 ```
  
 удалить
