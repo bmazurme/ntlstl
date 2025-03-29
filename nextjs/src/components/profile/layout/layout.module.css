@@ -68,7 +68,6 @@
   display: grid;
   margin-bottom: 10px;
   max-width: 640px;
-  
   grid-template-areas:
     "from name"
     "to position"
@@ -94,6 +93,9 @@
 
 .details {
   grid-area: details;
+  display: flex;
+  flex-direction: column;
+
 }
 
 .block {

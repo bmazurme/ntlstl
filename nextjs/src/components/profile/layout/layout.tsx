@@ -84,19 +84,13 @@ const jobs = [
     },
     name: 'Ifellow',
     position: 'Frontend-разработчик',
-    details: `Разработка CRM-системы, разработка новых модулей, интеграция со сторонними сервисами.
-              Стек: JS, Vue, jsPanel, Vite.
-              Тесты: Jest, Cypress.
-              GitLab, CI/CD GitLab Runner
-
-              Разработка ERP-системы.
-              Стек: TS, React, Redux, MUI, RTK query, Axios, React Table, react-dnd, react-d3-tree, recharts, react hook forms, Webpack. ESlint, Husky. Airbnb style guide.
-              Тесты: Jest, Cypress.
-              Nginx, Docker/Podman, Docker Compose, GitHub, GitHub Actions
-
-              Также разработка MVP с использованием:
-              Next.js, MUI, Tailwind, Ant Design, Express.js, Nest.js, BEM, Nginx, pm2, TypeORM, Sequelize, PostgreSQL, Mongo DB. OAuth.
-              CI/CD GitHub Actions, YC.`,
+    details: [
+      'внедрение на проекте статического анализа кода, модульного и e2e тестирования ESLint, Jest, Cypress, Husky',
+      'внедрение на проекте ci/cd, тестирование, сборка, развертывание GitLab, GitLab runner, Linux, Tomcat, Maven, Node',
+      'для авторизации по NTLM и взаимодействия со сторонними сервисами разработка BFF Nestjs, Redis, NTLM',
+      'разработка новых модулей Frontend для CRM-системы JS, Vue',
+      'разработка части Frontend для сервисов администрирования TS, React, RTK, MUI',
+    ],
   },
   {
     date: {
@@ -105,10 +99,12 @@ const jobs = [
     },
     name: 'Step logic',
     position: 'Frontend-разработчик',
-    details: `Разработка внутреннего портала. Разработка расчетных модулей для инженерных расчетов, формирование документации.
+    details: [
+      `Разработка внутреннего портала. Разработка расчетных модулей для инженерных расчетов, формирование документации.
               Стек: JS, React, Redux, RTK query, MUI, CSS, BEM, React Table, KaTeX, viewer Autodesk Forge, JSZip, Canvas, ASP.NET Core, Webpack.
               Тесты: Jest.
               GitHub`,
+    ],
   },
   {
     date: {
@@ -117,8 +113,10 @@ const jobs = [
     },
     name: 'APEX project bureau',
     position: 'Desktop developer',
-    details: `Автоматизация процессов проектирования. Разработка приложений для инженерных расчетов, интеграция с Revit API, Forge API, AutoCAD, DiaLux.
+    details: [
+      `Автоматизация процессов проектирования. Разработка приложений для инженерных расчетов, интеграция с Revit API, Forge API, AutoCAD, DiaLux.
               Стек: C#, WPF, WPFMath, JS, CSS, React, Webpack, PostgreSQL, LaTeX, Material design, Bootstrap, GitHub`,
+    ],
   },
   {
     date: {
@@ -127,7 +125,7 @@ const jobs = [
     },
     name: 'AECOM Construction Services',
     position: 'Desktop developer',
-    details: `Проектирование систем ВиВ`,
+    details: ['Проектирование систем ВиВ'],
   },
 ];
 
@@ -151,9 +149,13 @@ export const Layout: React.FC = () => {
             <Text className={style.position} variant="subheader-1">
               {item.position}
             </Text>
-            <Text className={style.details} variant="body-1">
-              {item.details}
-            </Text>
+            <div className={style.details}>
+              {item.details.map((x, i) => (
+                <Text variant="body-1" key={i}>
+                  {x}
+                </Text>
+              ))}
+            </div>
           </div>
         ))}
         <Text variant="header-1" className={style.block}>
