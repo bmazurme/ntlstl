@@ -86,7 +86,7 @@ const jobs = [
     position: 'Frontend-разработчик',
     details: [
       'внедрение на проекте статического анализа кода, модульного и e2e тестирования ESLint, Jest, Cypress, Husky',
-      'внедрение на проекте ci/cd, тестирование, сборка, развертывание GitLab, GitLab runner, Linux, Tomcat, Maven, Node',
+      'внедрение на проекте CI/CD, тестирование, сборка, развертывание GitLab, GitLab runner, Linux, Tomcat, Maven, Node',
       'для авторизации по NTLM и взаимодействия со сторонними сервисами разработка BFF Nestjs, Redis, NTLM',
       'разработка новых модулей Frontend для CRM-системы JS, Vue',
       'разработка части Frontend для сервисов администрирования TS, React, RTK, MUI',
@@ -100,10 +100,8 @@ const jobs = [
     name: 'Step logic',
     position: 'Frontend-разработчик',
     details: [
-      `Разработка внутреннего портала. Разработка расчетных модулей для инженерных расчетов, формирование документации.
-              Стек: JS, React, Redux, RTK query, MUI, CSS, BEM, React Table, KaTeX, viewer Autodesk Forge, JSZip, Canvas, ASP.NET Core, Webpack.
-              Тесты: Jest.
-              GitHub`,
+      'Разработка внутреннего портала. Разработка расчетных модулей для инженерных расчетов, формирование документации.',
+      'Стек: JS, React, Redux, RTK query, MUI, CSS, BEM, React Table, KaTeX, viewer Autodesk Forge, Canvas, Webpack, Jest, GitHub',
     ],
   },
   {
@@ -114,8 +112,8 @@ const jobs = [
     name: 'APEX project bureau',
     position: 'Desktop developer',
     details: [
-      `Автоматизация процессов проектирования. Разработка приложений для инженерных расчетов, интеграция с Revit API, Forge API, AutoCAD, DiaLux.
-              Стек: C#, WPF, WPFMath, JS, CSS, React, Webpack, PostgreSQL, LaTeX, Material design, Bootstrap, GitHub`,
+      'Автоматизация процессов проектирования. Разработка приложений для инженерных расчетов, интеграция с Revit API, Forge API, AutoCAD, DiaLux.',
+      'Стек: C#, WPF, WPFMath, JS, CSS, React, Webpack, PostgreSQL, LaTeX, Material design, Bootstrap, GitHub',
     ],
   },
   {
