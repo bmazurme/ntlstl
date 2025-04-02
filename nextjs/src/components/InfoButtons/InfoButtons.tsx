@@ -2,11 +2,11 @@
 
 import React from 'react';
 import block from 'bem-cn-lite';
-import {Button, Icon} from '@gravity-ui/uikit';
-import {BookOpen, CopyTransparent, ListCheck, ListUl, LogoTelegram} from '@gravity-ui/icons';
-import Storybook from '../../assets/icons/storybook.svg';
-import Figma from '../../assets/icons/figma.svg';
-import GitHub from '../../assets/icons/github.svg';
+// import {Button, Icon} from '@gravity-ui/uikit';
+// import {BookOpen, CopyTransparent, ListCheck, ListUl, LogoTelegram} from '@gravity-ui/icons';
+// import Storybook from '../../assets/icons/storybook.svg';
+// import Figma from '../../assets/icons/figma.svg';
+// import GitHub from '../../assets/icons/github.svg';
 
 import './InfoButtons.scss';
 
@@ -15,7 +15,7 @@ const b = block('info-buttons');
 export const InfoButtons: React.FC = () => {
   return (
     <div className={b()}>
-      <div className={b('block')}>
+      {/* <div className={b('block')}>
         <div className={b('title')}>About Gravity UI</div>
         <div className={b('buttons')}>
           <div className={b('button')}>
@@ -93,7 +93,7 @@ export const InfoButtons: React.FC = () => {
             </Button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
