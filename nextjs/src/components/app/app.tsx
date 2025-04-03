@@ -24,7 +24,7 @@ export const App: React.FC<AppProps> = ({children}) => {
     <ThemeContext.Provider value={{theme, setTheme}}>
       <Wrapper>
         <AsideHeader
-          logo={{icon: Ghost, text: 'nextjs-example', href: '/'}}
+          logo={{icon: Ghost, text: 'ghost', href: '/'}}
           menuItems={menuItems}
           compact={true}
           hideCollapseButton={true}
