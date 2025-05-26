@@ -21,6 +21,15 @@
   $ git clone https://github.com/gabihodoroaga/nginx-ntlm-module.git
 ```
 
+> Может понадобиться OpenSSL
+
+```bash
+  # RedOS
+  $ sudo yum install openssl-devel
+
+  $ openssl version
+```
+
 ### Собрать модуль nginx-ntlm-module
 
 ```bash
