@@ -4,7 +4,7 @@
 
 ```bash
   $ nginx -v
-  № nginx version: nginx/1.26.3
+  # nginx version: nginx/1.26.3
 ```
 
 ### Скачать и распаковать
