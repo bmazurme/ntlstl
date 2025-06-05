@@ -5,7 +5,7 @@
     withCredentials: true,
     headers: {
       // 'cache-control': 'no-cache',
-      'Connection': 'keep-alive',
+      // 'Connection': 'keep-alive',
     },
     maxContentLength: -1,
   });
