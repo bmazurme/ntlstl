@@ -11,7 +11,6 @@ let DevServerPort = 8088;
 
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-  console.log(process.env.VITE_APP_PUBLIC);
 
   return defineConfig({
     base: '',
