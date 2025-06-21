@@ -30,5 +30,4 @@ export default ({ mode }) => {
     publicDir: process.env.VITE_APP_PUBLIC || 'public',
   });
 };
-
 ```
