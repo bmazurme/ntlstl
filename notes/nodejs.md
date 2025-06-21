@@ -15,9 +15,9 @@
 Если это первое подключение к серверу, вы увидите фразу:
 
 ```bash
-    The authenticity of host '192.168.50.51 (192.168.50.51)' can't be established.
-    ECDSA key fingerprint is SHA256:gGz1AULJpNptRRaqLz2FQTDf/IRxSGPA0vvmmXWy/6I.
-    Are you sure you want to continue connecting (yes/no)?
+  The authenticity of host '192.168.50.51 (192.168.50.51)' can't be established.
+  ECDSA key fingerprint is SHA256:gGz1AULJpNptRRaqLz2FQTDf/IRxSGPA0vvmmXWy/6I.
+  Are you sure you want to continue connecting (yes/no)?
 ```
 
 Введите “yes” и нажмите Enter. Вам будет предложено ввести пароль от приватного ключа. Введите его и снова нажмите Enter. Если пароль правильный, вы окажетесь на удалённом сервере.
@@ -26,7 +26,7 @@
 
 Проверьте версию Node.js
 ```bash
-    node -vnode -v
+  node -vnode -v
 ```
 В командной строке появится номер версии
 
