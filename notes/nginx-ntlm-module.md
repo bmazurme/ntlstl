@@ -1,28 +1,30 @@
-# nginx-ntlm-module
+# Установка и настройка NGINX NTLM-модуля
+NGINX NTLM-модуль — это дополнительный модуль для веб-сервера Nginx, который позволяет реализовать аутентификацию по протоколу NTLM. Это особенно полезно при работе с корпоративными сетями и Active Directory.
 
-### Проверить установленную версию nginx
-
+### Проверка версии Nginx
+#### Перед установкой модуля необходимо проверить текущую версию Nginx:
 ```bash
   $ nginx -v
   # nginx version: nginx/1.26.3
 ```
 
-### Скачать и распаковать
-
+### Подготовка к установке
+#### Скачивание исходных файлов
+- Скачайте архив с исходниками Nginx:
 ```bash
   $ wget https://nginx.org/download/nginx-1.26.3.tar.gz
   $ tar -zxf nginx-*.tar.gz
   $ cd nginx-*/
 ```
 
-### Скачать nginx-ntlm-module
-  
+- Клонируйте репозиторий модуля:
 ```bash
   $ git clone https://github.com/gabihodoroaga/nginx-ntlm-module.git
 ```
-
 > Может понадобиться OpenSSL
 
+### Установка зависимостей
+#### Для сборки модуля может потребоваться библиотека OpenSSL:
 ```bash
   # RedOS
   $ sudo yum install openssl-devel
@@ -30,33 +32,32 @@
   $ openssl version
 ```
 
-### Собрать модуль nginx-ntlm-module
-
+### Сборка и установка модуля
+- Соберите модуль:
 ```bash
   $ sudo ./configure --with-compat --add-dynamic-module=nginx-ntlm-module
   $ sudo make
   $ sudo make modules
 ```
 
-### Скопировать модуль nginx-ntlm-module
-
+- Скопируйте собранный модуль:
 ```bash
   $ sudo cp objs/ngx_http_upstream_ntlm_module.so /usr/lib64/nginx/modules/
 ```
 
-### Подключить модуль
-
+### Настройка конфигурации
+- Создайте конфигурационный файл модуля:
 ```bash
   $ sudo nano /etc/nginx/modules/nginx-ntlm-module.conf
-  # $ sudo nano /usr/share/nginx/modules/nginx-ntlm-module.conf
+  # или
+  $ sudo nano /usr/share/nginx/modules/nginx-ntlm-module.conf
 ```
-
+Добавьте строку:
 ```bash
   load_module /usr/lib64/nginx/modules/ngx_http_upstream_ntlm_module.so;
 ```
 
-### Добавить в конфиг
-
+- Обновите основной конфигурационный файл Nginx:
 ```
 upstream http_backend {
   server 127.0.0.1:8080;
@@ -76,11 +77,20 @@ server {
 }
 ```
 
-### Перезапустить
-  
+### Завершающие шаги
+- Проверьте конфигурацию:
 ```bash
   $ sudo nginx -t
+```
+
+- Перезапустите NGINX:
+```bash
   $ sudo systemctl restart nginx
 ```
+
+### Возможные проблемы
+- Убедитесь, что путь к модулю указан корректно
+- Проверьте права доступа к файлам конфигурации
+- При возникновении ошибок проверьте логи NGINX
 
 #### https://github.com/gabihodoroaga/nginx-ntlm-module
