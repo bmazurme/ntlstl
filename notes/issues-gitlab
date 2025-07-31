@@ -1,0 +1,103 @@
+### Автоматизация создания Issues в GitLab
+#### Подготовка окружения
+
+Для автоматической генерации Issues нам потребуется:
+- GitLab CI/CD настроен в проекте
+- API токен с правами на создание Issues
+- Node.js в окружении CI
+
+Шаг 1: Создание скрипта
+
+Создадим файл create-issue.js со следующим содержимым:
+
+```js
+const fetch = require('node-fetch');
+
+async function createIssue(title, description, projectId) {
+  const token = process.env.GITLAB_TOKEN;
+  const url = `https://gitlab.com/api/v4/projects/${projectId}/issues`;
+  
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Private-Token': token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        labels: ['dependencies']
+      })
+    });
+    
+    const result = await response.json();
+
+    console.log('Issue created:', result);
+  } catch (error) {
+    console.error('Error creating issue:', error);
+  }
+}
+
+module.exports = createIssue;
+```
+
+Шаг 2: Настройка GitLab CI
+
+Добавляем в .gitlab-ci.yml:
+
+```yaml
+stages:
+  - check
+  - create-issue
+
+check-dependencies:
+  stage: check
+  image: node:latest
+  script:
+    - npm ci
+    - npm run check-outdated
+  artifacts:
+    reports:
+      json-report: outdated-report.json
+  only:
+    - main
+    - merge_requests
+
+create-issue-on-outdated:
+  stage: create-issue
+  image: node:latest
+  script:
+    - npm install node-fetch
+    - node create-issue.js "$(cat outdated-report.json)"
+  dependencies:
+    - check-dependencies
+  only:
+    - main
+    - merge_requests
+```
+
+Шаг 3: Настройка переменных
+
+В настройках проекта GitLab добавьте переменную окружения:
+- GITLAB_TOKEN - ваш персональный токен доступа
+- PROJECT_ID - ID вашего проекта GitLab
+
+> Пример использования
+Полный пример скрипта для создания Issue на основе отчета:
+
+```js
+const { createIssue } = require('./create-issue');
+
+// Получаем список устаревших зависимостей
+const outdatedPackages = JSON.parse(process.argv[2]);
+
+const title = 'Устаревшие зависимости';
+const description = `Обнаружены устаревшие зависимости:\n\n`;
+
+outdatedPackages.forEach(package => {
+  description += `- ${package.name}: текущая версия ${package.current}, доступна ${package.wanted}\n`;
+});
+
+createIssue(title, description, process.env.PROJECT_ID);
+```
