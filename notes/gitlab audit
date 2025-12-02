@@ -1,0 +1,65 @@
+audit-job:
+  stage: audit-stage
+  tags:
+    - bff
+  script:
+    - echo '🔍 Начинаем проверку безопасности npm-зависимостей...'
+    - echo 'Ветвь $CI_COMMIT_BRANCH, Commit $CI_COMMIT_SHORT_SHA'
+
+    # Установка зависимостей (на случай, если их нет)
+    - if [ -f "package-lock.json" ]; then npm ci; else npm install; fi
+
+    # Базовый аудит с выводом в консоль (для быстрой обратной связи)
+    - npm audit --audit-level=moderate
+
+    # Расширенный аудит с детальным отчётом
+    - echo 'Генерация JSON‑отчёта...'
+    - npm audit --json --audit-level=critical > security-audit-report.json
+
+    # Проверка наличия отчёта и его содержимого
+    - |
+      if [ -f security-audit-report.json ] && [ -s security-audit-report.json ]; then
+        echo '📊 Отчёт с результатами аудита сохранён: security-audit-report.json'
+        # Безопасное получение количества критических уязвимостей через jq (если установлен)
+        if command -v jq > /dev/null; then
+          CRITICAL_COUNT=$(jq '.metadata.vulnerabilities.critical // 0' security-audit-report.json)
+          echo "Найдено критических уязвимостей: $CRITICAL_COUNT"
+        else
+          # Резервный метод через grep
+          CRITICAL_COUNT=$(grep -o '"critical": *[0-9]+' security-audit-report.json | sed 's/.*: *//')
+          if [ -z "$CRITICAL_COUNT" ]; then
+            CRITICAL_COUNT=0
+          fi
+          echo "Найдено критических уязвимостей (через grep): $CRITICAL_COUNT"
+        fi
+      else
+        echo '⚠️ Отчёт отсутствует или пуст — уязвимостей критического уровня не обнаружено.'
+      fi
+
+    # Дополнительно: проверка устаревших пакетов (полезная аналитика)
+    - echo 'Проверка устаревших зависимостей...'
+
+    - npm ci
+    - npm-check-updates --version
+    - npx npm-check-updates --target minor --jsonAll > outdated-dependencies.json
+    - echo 'Список устаревших пакетов сохранён outdated-dependencies.json'
+
+    - echo '✅ Аудит безопасности завершен.'
+
+  rules:
+    - if: $CI_COMMIT_BRANCH == 're-2026'
+      when: always  # Всегда запускать на DEV, даже если предыдущие стадии провалились
+    - when: never  # Не запускать для других веток
+
+  artifacts:
+    paths:
+      - security-audit-report.json
+      - outdated-dependencies.json
+    expire_in: 1 week
+    reports:
+      dependency_scanning: security-audit-report.json
+
+  timeout: 10m
+
+  interruptible: true  # Можно прервать, если запушен новый пайплайн
+  environment: development
