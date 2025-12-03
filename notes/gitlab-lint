@@ -1,0 +1,50 @@
+eslint:
+  stage: analyzes
+  tags:
+    - bff
+
+  # Чёткое ограничение времени (10 минут)
+  timeout: 10m
+
+  # Оптимизируем установку: используем кэш, избегаем лишних операций
+  cache:
+    key: ${CI_JOB_NAME}
+    paths:
+      - node_modules/
+    policy: pull-push  # сначала пытаемся забрать, потом сохраняем
+  
+  script:
+    - echo "🔍 Начинаем проверку ESLint..."
+    - echo "Текущий бранч $CI_COMMIT_BRANCH"
+    - echo "SHA коммита $CI_COMMIT_SHA"
+
+    # Устанавливаем зависимости только если нет кэша или он устарел
+    - if [ ! -d "node_modules" ] || [ ! -f "package-lock.json" ]; then npm ci; fi
+
+    - npm install -D eslint-formatter-unix
+    # Запускаем ESLint с подробным выводом и сохранением результата
+    - npm run lint -- --format=unix --output-file=lint-results.txt
+    - echo "✅ Проверка ESLint завершена."
+
+    # Выводим количество ошибок для быстрой оценки в логе
+    - |
+      ERROR_COUNT=$(grep -c "^" lint-results.txt || echo 0)
+      echo "Найдено ошибок ESLint: $ERROR_COUNT"
+      if [ "$ERROR_COUNT" -gt 0 ]; then
+        echo "⚠️  Обнаружены ошибки ESLint. Подробности в артефакте lint-results.txt"
+      else
+        echo "✔️ ESLint: нет ошибок."
+      fi
+
+  artifacts:
+    when: always
+    paths:
+      - lint-results.txt
+    expire_in: 1 week
+
+  rules:
+    - if: $CI_COMMIT_BRANCH == "re-2026"
+
+  # Дополнительно: метки для идентификации
+  variables:
+    GIT_STRATEGY: fetch
